@@ -1,12 +1,6 @@
 const gridContainer = document.querySelector(".grid-container");
 const gridSquare = 960;
-/*
-for (let i = 1; i < 17; i++) {
-  let grids = document.createElement("div");
-  grids.classList.add("grid-" + i);
-  container.appendChild(grids);
-}
-*/
+
 function createGrid(row, col) {
   gridContainer.style.gridTemplateColumns = "repeat(" + col + ",1fr)";
 
@@ -27,3 +21,9 @@ function createGrid(row, col) {
   }
 }
 createGrid(16, 16);
+const grid = document.querySelectorAll(".grid-container");
+grid.forEach((div) => {
+  div.addEventListener("mouseover", function (e) {
+    e.target.style.background = "blue";
+  });
+});
