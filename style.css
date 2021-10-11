@@ -1,0 +1,25 @@
+body{
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: beige;
+    text-align: center;
+}
+.grid-container{
+    
+    display: inline-grid;
+    width: 960px;
+   left: 50%;
+    
+            
+}
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
