@@ -1,11 +1,13 @@
 const gridContainer = document.querySelector(".grid-container");
-const gridSquare = 960;
+const gridWidth = 960;
+const gridHeight = 600;
+const clear = document.querySelector(".clear");
 
 function createGrid(row, col) {
   gridContainer.style.gridTemplateColumns = "repeat(" + col + ",1fr)";
 
-  squareHeight = gridSquare / row;
-  squareWidth = gridSquare / col;
+  squareHeight = gridHeight / row;
+  squareWidth = gridWidth / col;
   for (i = 1; i <= row; i++) {
     for (j = 1; j <= col; j++) {
       let grids = document.createElement("div");
@@ -21,9 +23,15 @@ function createGrid(row, col) {
   }
 }
 createGrid(16, 16);
-const grid = document.querySelectorAll(".grid-container");
+const grid = document.querySelectorAll(".grid-container div");
 grid.forEach((div) => {
   div.addEventListener("mouseover", function (e) {
     e.target.style.background = "blue";
+    // console.log(e.target);
+  });
+});
+clear.addEventListener("click", () => {
+  grid.forEach((div) => {
+    div.style.background = "white";
   });
 });

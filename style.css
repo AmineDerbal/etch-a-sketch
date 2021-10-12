@@ -11,7 +11,7 @@ h1 {
 .grid-container {
   display: grid;
   width: 960px;
-height: 960px;
+height: auto;
 /*margin: auto;
 padding: auto;*/
   
