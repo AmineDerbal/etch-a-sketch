@@ -1,8 +1,23 @@
 const gridContainer = document.querySelector(".grid-container");
 const gridWidth = 960;
 const gridHeight = 600;
+let rainbowColorsOrder = [
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "blue",
+  "indigo",
+  "violet",
+];
+let rainbowColor = 0;
+function rainbowMode() {
+  // to write later
+}
+
 const clear = document.querySelector(".clear");
 
+// create grid according to the number of row and col given
 function createGrid(row, col) {
   gridContainer.style.gridTemplateColumns = "repeat(" + col + ",1fr)";
 
@@ -23,13 +38,15 @@ function createGrid(row, col) {
   }
 }
 createGrid(16, 16);
+
 const grid = document.querySelectorAll(".grid-container div");
 grid.forEach((div) => {
   div.addEventListener("mouseover", function (e) {
-    e.target.style.background = "blue";
+    e.target.style.background = document.getElementById("myColor").value;
     // console.log(e.target);
   });
 });
+
 clear.addEventListener("click", () => {
   grid.forEach((div) => {
     div.style.background = "white";
