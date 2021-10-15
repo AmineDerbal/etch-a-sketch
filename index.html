@@ -20,7 +20,22 @@
         <button class="clear">Clear</button>
         <button class="eraser">Eraser</button>
       </div>
+      <div class="range-container">
+        <input
+          type="range"
+          id="range"
+          min="1"
+          max="64"
+          step="1"
+          value="16"
+          oninput="changeNumberGrids()"
+        />
+      </div>
+      <div class="box"></div>
       <section class="grid-container"></section>
     </div>
+    <footer class="footer">
+      <span>Copyright © The Odin Project 2021</span>
+    </footer>
   </body>
 </html>

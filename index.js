@@ -3,9 +3,13 @@ const clear = document.querySelector(".clear");
 const colorMode = document.querySelector(".color");
 const eraser = document.querySelector(".eraser");
 const rainbowButton = document.querySelector(".rainbow");
-const gridWidth = 960;
-const gridHeight = 600;
+const box = document.querySelector(".box");
+const range = document.querySelector("#range");
+
+const gridWidth = 800;
+const gridHeight = 500;
 let mode = "";
+let rainbowColor = 0;
 
 let rainbowColorsOrder = [
   "red",
@@ -16,13 +20,15 @@ let rainbowColorsOrder = [
   "indigo",
   "violet",
 ];
-let rainbowColor = 0;
+
 function rainbowMode() {
   let rainbow = rainbowColorsOrder[rainbowColor];
   if (rainbowColor == 6) rainbowColor = 0;
   else rainbowColor++;
   return rainbow;
 }
+
+// return the value of yhe color selected in the pallette
 function getColor() {
   let color = document.getElementById("myColor").value;
   return color;
@@ -32,8 +38,16 @@ function getColor() {
 function createGrid(row, col) {
   gridContainer.style.gridTemplateColumns = "repeat(" + col + ",1fr)";
 
-  squareHeight = gridHeight / row;
-  squareWidth = gridWidth / col;
+  squareHeight = gridHeight / parseFloat(row);
+  squareWidth = gridWidth / parseFloat(col);
+  if (gridContainer.childElementCount > 0) {
+    let first = gridContainer.firstElementChild;
+    while (first) {
+      first.remove();
+      first = gridContainer.firstElementChild;
+    }
+  }
+
   for (i = 1; i <= row; i++) {
     for (j = 1; j <= col; j++) {
       let grids = document.createElement("div");
@@ -47,31 +61,43 @@ function createGrid(row, col) {
       gridContainer.appendChild(grids);
     }
   }
+
+  gridAddListener();
 }
-createGrid(16, 16);
+changeNumberGrids();
 
-const grid = document.querySelectorAll(".grid-container div");
-grid.forEach((div) => {
-  div.addEventListener("mouseover", function (e) {
-    switch (mode) {
-      case "color":
-        e.target.style.background = getColor();
-        break;
+function gridAddListener() {
+  let grid = document.querySelectorAll(".grid-container div");
+  grid.forEach((div) => {
+    div.addEventListener("mouseover", function (e) {
+      switch (mode) {
+        case "color":
+          e.target.style.background = getColor();
+          break;
 
-      case "rainbow":
-        e.target.style.background = rainbowMode();
-        break;
+        case "rainbow":
+          e.target.style.background = rainbowMode();
+          break;
 
-      case "eraser":
-        e.target.style.background = "white";
-    }
-    //e.target.style.background = getColor();
-    //console.log(e.target.classList);
+        case "eraser":
+          e.target.style.background = "white";
+          break;
+
+        default:
+          break;
+      }
+      //e.target.style.background = getColor();
+      //console.log(e.target.classList);
+    });
   });
-});
+}
 
 // EventListener for clear button
+
 clear.addEventListener("click", () => {
+  let grid = document.querySelectorAll(".grid-container div");
+  mode = "clear";
+  clear.focus();
   grid.forEach((div) => {
     div.style.background = "white";
   });
@@ -80,12 +106,24 @@ clear.addEventListener("click", () => {
 // EventListener for Color Mode button
 colorMode.addEventListener("click", () => {
   mode = "color";
+  colorMode.focus();
 });
 
+//
 eraser.addEventListener("click", () => {
   mode = "eraser";
+  eraser.focus();
 });
 
 rainbowButton.addEventListener("click", () => {
   mode = "rainbow";
+  rainbowButton.focus();
 });
+
+//
+function changeNumberGrids() {
+  var val = range.value;
+  createGrid(val, val);
+
+  box.textContent = " GRID OF " + val + "X" + val;
+}
