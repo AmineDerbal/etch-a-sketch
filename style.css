@@ -9,11 +9,11 @@ h1 {
   text-align: center;
 }
 .grid-container {
-  align-self: center;
+  
   display: grid;
   
-  width: 800 ;
-height: auto;
+  width: 800px ;
+height: 500px;
 border: solid 3px black;
 border-radius: 5px;
 
